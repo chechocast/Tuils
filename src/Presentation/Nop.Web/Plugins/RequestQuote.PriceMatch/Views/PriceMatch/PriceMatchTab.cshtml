@@ -1,0 +1,135 @@
+﻿@model Nop.Plugin.RequestQuote.PriceMatch.Models.PriceMatchModel
+@{
+    Layout = "~/Views/Shared/_RootPopup.cshtml";
+    Html.AddCssFileParts("~/Plugins/RequestQuote.PriceMatch/Content/style.css");
+
+    Html.AppendScriptParts("~/Scripts/jquery.validate.unobtrusive.min.js");
+    Html.AppendScriptParts("~/Scripts/jquery.validate.min.js");
+}
+@using System
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@using Nop.Web;
+@using Nop.Web.Framework.UI;
+@using Nop.Web.Framework;
+<style>
+    .registration-page { text-align: left; }
+        .registration-page .buttons { text-align: center; }
+    .fieldset .inputs label { margin-left: 0 !important; }
+    .registration-page p { margin-bottom: 20px; }
+</style>
+<div class="page registration-page">
+    <div class="page-title">
+        <h1>@T("Plugins.RequestQuote.PriceMatch.ContactUsTitle")</h1>
+    </div>
+    <div class="page-body">
+        @*@if (Model.SuccessfullySent)
+            {
+                <div class="result">
+                    <strong>@Model.Result</strong>
+                </div>
+            }*@
+
+        <div class="result"></div>
+        <div class="error-result"></div>
+
+        <p>@T("Plugins.RequestQuote.PriceMatch.ContactUsForDetails")</p>
+        @using (Html.BeginForm("PriceMatchTab", "PriceMatch", FormMethod.Post, new { enctype = "multipart/form-data", id = "pricematch" }))
+        {
+            @Html.HiddenFor(m => m.ProductId)
+
+            <div class="fieldset">
+                <div class="title">
+                    <strong>@T("Account.YourPersonalDetails")</strong>
+                </div>
+                <div class="form-fields">
+
+                    <div class="inputs">
+                        @Html.LabelFor(m => m.FullName, new { }, ":")
+                        @Html.TextBoxFor(m => m.FullName)
+                        @Html.TextBoxFor(m => m.LastName, new { Value = "enter your last name" })
+                        @Html.RequiredHint()
+                        @Html.ValidationMessageFor(m => m.FullName)
+                    </div>
+                    @*<div class="inputs">
+                        @Html.LabelFor(m => m.LastName, new { }, ":")
+                        @Html.TextBoxFor(m => m.LastName)
+                        @Html.RequiredHint()
+                        @Html.ValidationMessageFor(m => m.LastName)
+                    </div>*@
+                    <div class="inputs">
+                        @Html.LabelFor(m => m.Email, new { }, ":")
+                        @Html.TextBoxFor(m => m.Email)
+                        @Html.RequiredHint()
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                    <div class="inputs">
+                        @Html.LabelFor(m => m.PhoneNumber, new { }, ":")
+                        @Html.TextBoxFor(m => m.PhoneNumber)
+                        @Html.RequiredHint()
+                        @Html.ValidationMessageFor(m => m.PhoneNumber)
+                    </div>
+                </div>
+            </div>
+
+            <div class="fieldset">
+                <div class="title">
+                    <strong>@T("Plugins.RequestQuote.PriceMatch.ContactUsTitle")</strong>
+                </div>
+                <div class="form-fields">
+                    <div class="inputs">
+                        @Html.LabelFor(m => m.Details, new { style = "vertical-align: top;" }, ":")
+                        @Html.TextAreaFor(model => model.Details, new { style = "Width: 250px; Height: 150px;", placeholder = T("Plugins.RequestQuote.PriceMatch.Fields.Details.Hint") })
+                    </div>
+                       
+                    @*not available post files through ajax requests*@
+                    @*@if (Model.EnableQuoteAttachments)
+                        {
+                            <div class="inputs">
+                                <label for="file">@T("Plugins.RequestQuote.PriceMatch.UploadFile"):</label>
+                                <input type="file" name="file" id="file" />
+                            </div>
+                        }*@
+                </div>
+            </div>
+
+            <div class="buttons">
+                <input type="submit" id="save-button" value="@T("ContactUs.Button")" name="save-button" class="button-1 contact-us-button" />
+            </div>
+            
+            <script>
+                $(function () {
+                    $('#pricematch').submit(function (evt) {
+                        //prevent the browsers default function
+                        evt.preventDefault();
+                        //grab the form and wrap it with jQuery
+                        var $form = $(this);
+                        //if client side validation fails, don't do anything
+                        if (!$form.valid()) return;
+                        //send your ajax request
+                        var url = $form.attr("action");
+                        var formData = $form.serialize();
+                        //console.log($(this).serialize());
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: formData,
+                            dataType: "json",
+                            //traditional: true,
+                            success: function (response) {
+                                //alert(response.Result);
+                                if (response.SuccessfullySent) {
+                                    //alert(response.Result);
+                                    jQuery("<h3>" + response.Result + "</h3>").appendTo(".result").fadeOut(800).fadeIn(800).fadeOut(400).fadeIn(400).fadeOut(400).fadeIn(400);
+                                }
+                                else {
+                                    jQuery("<h3>" + response.Result + "</h3>").appendTo(".error-result").fadeOut(800).fadeIn(800).fadeOut(400).fadeIn(400).fadeOut(400).fadeIn(400);
+                                }
+                            }
+                        });
+                    });
+                });
+            </script>
+        }
+    </div>
+</div>

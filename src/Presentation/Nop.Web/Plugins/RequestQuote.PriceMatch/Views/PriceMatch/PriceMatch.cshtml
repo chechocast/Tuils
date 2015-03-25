@@ -1,0 +1,97 @@
+﻿@model Nop.Plugin.RequestQuote.PriceMatch.Models.PriceMatchModel
+@{
+    Layout = "~/Views/Shared/_RootPopup.cshtml";
+    Html.AddCssFileParts(ResourceLocation.Foot, "~/Themes/DefaultClean/Content/styles.css");
+    Html.AddCssFileParts("~/Plugins/RequestQuote.PriceMatch/Content/style.css");
+
+    Html.AppendScriptParts("~/Scripts/jquery.validate.unobtrusive.min.js");
+    Html.AppendScriptParts("~/Scripts/jquery.validate.min.js");
+}
+@using System
+@using Nop.Web;
+@using Nop.Web.Framework.UI;
+@using Nop.Web.Framework;
+
+<div class="page registration-page">
+    <style>
+    body { background: none !important; }
+    .registration-page { text-align: left; }
+    .registration-page .buttons { text-align: center; }
+    .fieldset .inputs label {margin-left:0 !important;}
+    .registration-page p {margin-bottom:20px; }
+</style>
+    <div class="page-title">
+        <h1>@T("Plugins.RequestQuote.PriceMatch.ContactUsTitle")</h1>
+    </div>
+    <div class="page-body">
+        @if (Model.SuccessfullySent)
+        {
+            <div class="result">
+                <strong>@Model.Result</strong>
+            </div>        
+        }
+        else
+        {
+            <p>@T("Plugins.RequestQuote.PriceMatch.ContactUsForDetails")</p>
+            using (Html.BeginForm("PriceMatch", "PriceMatch", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+           @Html.HiddenFor(m => m.ProductId)
+
+<div class="fieldset"> 
+				<div class="title">
+                    <strong>@T("Account.YourPersonalDetails")</strong>
+                </div>
+		<div class="form-fields">
+            			
+                    <div class="inputs">
+                        @Html.LabelFor(m => m.FullName, new { }, ":")
+                        @Html.TextBoxFor(m => m.FullName)
+                        @Html.TextBoxFor(m => m.LastName, new { Value = "enter your last name" })
+                        @Html.RequiredHint()
+                        @Html.ValidationMessageFor(m => m.FullName)
+                    </div>
+					@*<div class="inputs">
+                    @Html.LabelFor(m => m.LastName, new { }, ":")
+                    @Html.TextBoxFor(m => m.LastName)
+                    </div>*@
+					<div class="inputs">
+					@Html.LabelFor(m => m.Email, new { }, ":")
+                    @Html.TextBoxFor(m => m.Email)
+                    @Html.RequiredHint()
+                @Html.ValidationMessageFor(m => m.Email)
+                </div>
+            <div class="inputs">
+                    @Html.LabelFor(m => m.PhoneNumber, new { }, ":")
+                    @Html.TextBoxFor(m => m.PhoneNumber)
+                        @Html.RequiredHint()
+                @Html.ValidationMessageFor(m => m.PhoneNumber)
+                </div>
+		</div>
+	</div>
+        
+<div class="fieldset">
+					<div class="title">
+                        <strong>@T("Plugins.RequestQuote.PriceMatch.ContactUsTitle")</strong>
+                    </div>
+		<div class="form-fields">
+					<div class="inputs">
+                    @Html.LabelFor(m => m.Details, new { style = "vertical-align: top;" }, ":")
+                @Html.TextAreaFor(model => model.Details, new { style = "Width: 250px; Height: 150px;", placeholder = T("Plugins.RequestQuote.PriceMatch.Fields.Details.Hint") })
+                </div>
+            @if (Model.EnableQuoteAttachments)
+            {
+					<div class="inputs">
+                    <label for="file">@T("Plugins.RequestQuote.PriceMatch.UploadFile"):</label>
+                    <input type="file" name="file" id="file" />
+                    </div>
+            }
+		</div>
+</div>
+            
+<div class="buttons">
+<input type="submit" id="save-button" value="@T("ContactUs.Button")" name="save-button" class="button-1 contact-us-button" />
+</div>
+            }
+        }
+    </div>
+</div>

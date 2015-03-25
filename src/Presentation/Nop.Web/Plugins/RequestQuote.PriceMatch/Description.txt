@@ -1,0 +1,8 @@
+﻿Group: RequestQuote
+FriendlyName: RequestQuote PriceMatch
+SystemName: RequestQuote.PriceMatch
+Version: 2.20
+SupportedVersions: 3.50
+Author: N-Theme team
+DisplayOrder: 0
+FileName: Nop.Plugin.RequestQuote.PriceMatch.dll

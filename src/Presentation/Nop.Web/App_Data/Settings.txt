@@ -1,0 +1,2 @@
+DataProvider: sqlserver
+DataConnectionString: Data Source=ASUS_CASA;Initial Catalog=nopCommerce_demo_vs;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=Temporal1

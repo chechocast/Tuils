@@ -1,0 +1,25 @@
+﻿12/05/2014
+---------------------------------
+Updated references for 3.50 release
+Changed ContactUs View (changed a second parameter in ajax state calling)
+
+10/18/2014
+---------------------------------
+Added captcha protection
+Added meta title "PageTitle.RequestQuote"
+Added Ip Address sender to request a quote email 
+Fixed bug with ContactUs action (with not valid ModelState case)
+
+09/15/2014
+---------------------------------
+Updated plugin for nopCommerce 3.40 version
+
+04/14/2014
+---------------------------------
+Updated references
+Upgraded plugin to .NET 4.5.1
+
+07/01/2014
+---------------------------------
+Updated references
+Added changes.txt file

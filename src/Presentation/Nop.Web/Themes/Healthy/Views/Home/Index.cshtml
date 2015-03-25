@@ -1,0 +1,22 @@
+﻿@{
+    //edited
+    Layout = "~/Views/Shared/_ColumnsThree.cshtml";
+    //Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+}
+@*added*@
+@section slider {
+    @*@Html.Widget("home_page_top")*@
+}
+@*@added*@
+<div class="page home-page">
+    <div class="page-body">
+        @Html.Widget("home_page_top")
+        @Html.Action("TopicBlock", "Topic", new { systemName = "HomePageText" })
+        @Html.Action("HomepageCategories", "Catalog")
+        @Html.Action("HomepageProducts", "Product")
+        @*@Html.Action("HomepageBestSellers", "Product")*@
+        @Html.Action("HomePageNews", "News")
+        @Html.Action("HomePagePolls", "Poll")
+        @Html.Widget("home_page_bottom")
+    </div>
+</div>

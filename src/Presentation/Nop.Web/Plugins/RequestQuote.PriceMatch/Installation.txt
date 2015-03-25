@@ -1,0 +1,44 @@
+﻿Please unzip and upload request price plugin to Plugins folder.
+1. Go to admin, Plugins and click reload plugins
+2. Find "RequestQuote PriceMatch" plugin and install it
+3. After reloading, find this plugin and click configure
+4. Enable the plugin and enter an email address where a quote will be send. You can enable/disable attachments as well.
+
+Insert a row below into Themes/../Views/Product/_AddToCart.cshtml (create it if doesn't exist)
+@Html.Action("PriceMatchClick", "PriceMatch", new { productId = Model.ProductId })
+
+You can add some css into your css style file, so it will looks as on a demo
+
+/*make an offer*/
+.make-an-offer {display: inline-block; }
+.make-offer{
+    padding:5px 10px;
+    cursor:pointer;
+    background:#EA9C00;
+    color:#fff;
+    text-shadow:none;
+    border-color:#999;
+    border:0 none;
+    font-weight:700;
+    display: inline-block;
+    text-decoration: none;
+}
+.make-offer:hover {color:#fff;}
+.add-to-cart-button {
+    font-size: 1.2em;
+    margin-left: 15px;
+}
+.add-to-cart-button2  {
+    font-size: 1.2em;
+    margin-left: 15px;
+}
+
+You can customize "Request price" button by adding .make-offer.button-2 {} in your css file.
+
+* If you use pricematch tab, make sure to add disallow: /pricematchtab for your robots.txt before production.
+
+If you have any questions, please contact us at support@n-theme.com and we will help you.
+
+Thank you for ordering
+N-Theme team,
+www.n-theme.com

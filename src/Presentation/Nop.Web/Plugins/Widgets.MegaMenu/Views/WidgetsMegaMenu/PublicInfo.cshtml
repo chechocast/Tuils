@@ -1,0 +1,96 @@
+﻿@model Nop.Plugin.Widgets.MegaMenu.Models.PublicInfoModel
+@{
+    Layout = "";
+    Html.AddCssFileParts("~/Plugins/Widgets.MegaMenu/Content/dcmegamenu.css");
+    Html.AddScriptParts("~/Plugins/Widgets.MegaMenu/Scripts/jquery.dcmegamenu.1.3.3.min.js", true);
+    Html.AddScriptParts(ResourceLocation.Foot, "~/Plugins/Widgets.MegaMenu/Scripts/jquery.hoverIntent.minified.js");
+
+    if (Model.EnableResponsiveMenu)
+    {
+        Html.AddScriptParts(ResourceLocation.Foot, "~/Plugins/Widgets.MegaMenu/Scripts/jquery.meanmenu.min.js");
+    }
+}
+@using System
+@using Nop.Web;
+@using Nop.Web.Framework.UI;
+@using Nop.Web.Framework;
+@helper RenderCategoryLine(Nop.Plugin.Widgets.MegaMenu.Models.PublicInfoModel.CategoryModel category)
+{
+    <li>
+        <a title="@category.Name" href="@Url.RouteUrl("Category", new { SeName = category.SeName })">@category.Name</a>
+        @{            
+            if (category.SubCategories.Count > 0)
+            {          
+            <ul>
+                @foreach (var subCategory in category.SubCategories)
+                {
+                    @RenderCategoryLine(subCategory)
+                }
+            </ul>
+            }
+        }
+    </li>
+}
+@if (Model.Categories.Count > 0 || !String.IsNullOrWhiteSpace(Model.CustomItems))
+{   
+    <nav>
+        <ul id="mega-menu" class="mega-menu">
+            @if (Model.DisplayHomePage)
+            {
+                <li><a class="home" href="@Url.RouteUrl("HomePage")">@T("HomePage")</a></li>
+            }
+            @foreach (var category in Model.Categories)
+            {
+                @RenderCategoryLine(category)
+            }
+            @if (!String.IsNullOrWhiteSpace(Model.CustomItems))
+            {
+                @Html.Raw(Model.CustomItems)
+            }
+        </ul>
+    </nav>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function (jQuery) {
+            jQuery('#mega-menu').dcMegaMenu({
+                rowItems: '@Model.ColumnsNumber',
+            speed: 'fast'
+        });
+        @if (Model.EnableResponsiveMenu)
+        {
+            <text>jQuery('nav').meanmenu({
+            meanMenuContainer: 'div.header-menu',
+            meanScreenWidth: "800"
+        });</text>
+        }
+    });
+    </script>
+}
+<style type="text/css">
+    @if (!string.IsNullOrEmpty(Model.BgPicture1Url))
+    {
+        <text>#mega-menu li.dc-mega-li:nth-child(2) .sub{background: url("@Model.BgPicture1Url") no-repeat scroll right bottom #F9F9F9;}</text>
+    }
+    @if (!string.IsNullOrEmpty(Model.BgPicture2Url))
+    {
+        <text>#mega-menu li.dc-mega-li:nth-child(3) .sub{background: url("@Model.BgPicture2Url") no-repeat scroll right bottom #F9F9F9;}</text>
+    }
+    @if (!string.IsNullOrEmpty(Model.BgPicture3Url))
+    {
+        <text>#mega-menu li.dc-mega-li:nth-child(4) .sub{background: url("@Model.BgPicture3Url") no-repeat scroll right bottom #F9F9F9;}</text>
+    }
+    @if (!string.IsNullOrEmpty(Model.BgPicture4Url))
+    {
+        <text>#mega-menu li.dc-mega-li:nth-child(5) .sub{background: url("@Model.BgPicture4Url") no-repeat scroll right bottom #F9F9F9;}</text>
+    }
+    @if (!string.IsNullOrEmpty(Model.BgPicture5Url))
+    {
+        <text>#mega-menu li.dc-mega-li:nth-child(6) .sub{background: url("@Model.BgPicture5Url") no-repeat scroll right bottom #F9F9F9;}</text>
+    }   
+</style>
+@if (Model.EnableResponsiveMenu)
+{
+    <!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+}

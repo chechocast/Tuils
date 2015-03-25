@@ -1,0 +1,8 @@
+﻿Group: Widgets
+FriendlyName: Responsive Slider
+SystemName: Widgets.ResponsiveSlider
+Version: 2.10
+SupportedVersions: 3.50
+Author: N-theme team
+DisplayOrder: 1
+FileName: Nop.Plugin.Widgets.ResponsiveSlider.dll

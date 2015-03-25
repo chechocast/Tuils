@@ -1,0 +1,26 @@
+﻿@model Nop.Plugin.RequestQuote.PriceMatch.Models.PriceMatchClickModel
+@using System
+@using Nop.Web;
+@using Nop.Web.Framework.UI;
+@using Nop.Web.Framework;
+@{
+    Layout = "";
+    Html.AddCssFileParts(ResourceLocation.Foot, "~/Plugins/RequestQuote.PriceMatch/Content/fancybox/jquery.fancybox-1.3.4.css");
+    Html.AddScriptParts(ResourceLocation.Foot, "~/Plugins/RequestQuote.PriceMatch/Content/fancybox/jquery.fancybox-1.3.4.pack.js"); 
+}
+<div class="make-an-offer">
+    <a rel="nofollow" class="make-offer button-2" href='@Url.RouteUrl("Nop.Plugin.RequestQuote.PriceMatch", new { productId = Model.ProductId })'>@T("Plugins.RequestQuote.PriceMatch.PriceMatchAnchor")</a>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        jQuery(".make-offer").fancybox({
+            'speedIn': 600,
+            'speedOut': 200,
+            'width': 450,
+            'height': 550,
+            'type': 'iframe',
+            'centerOnScroll': true,
+            'autoScale': true
+        });
+    });
+</script>
+</div>

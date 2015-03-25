@@ -1,0 +1,8 @@
+﻿Group: Widgets
+FriendlyName: Mega Menu
+SystemName: Widgets.MegaMenu
+Version: 2.10
+SupportedVersions: 3.50
+Author: N-Theme team
+DisplayOrder: 1
+FileName: Nop.Plugin.Widgets.MegaMenu.dll

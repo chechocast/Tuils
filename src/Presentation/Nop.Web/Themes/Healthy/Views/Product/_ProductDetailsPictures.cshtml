@@ -1,0 +1,150 @@
+﻿@model ProductDetailsModel
+@using Nop.Core.Domain.Media
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Models.Catalog;
+@{
+    Html.AddScriptParts("~/Scripts/jquery.magnific-popup.js");
+    Html.AddCssFileParts("~/Content/magnific-popup/magnific-popup.css");
+
+    int productPerRow = EngineContext.Current.Resolve<MediaSettings>().ProductThumbPerRowOnProductDetailsPage;
+
+    //added
+    var currentThemeName = EngineContext.Current.Resolve<Nop.Web.Framework.Themes.IThemeContext>().WorkingThemeName;
+    //@added
+}
+<div class="gallery">
+
+    @if (Model.DefaultPictureZoomEnabled)
+    {
+        Html.AddScriptParts(String.Format("~/Themes/{0}/Content/Scripts/jquery.jqzoom-core-pack.js", currentThemeName));
+        <div class="picture">
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+                    @{
+        var supportRtl = EngineContext.Current.Resolve<Nop.Core.IWorkContext>().WorkingLanguage.Rtl;
+        var position = "right";
+        if (supportRtl)
+        {
+            position = "left";
+        }
+                    }
+                    var _lens = true;
+                    if ($(window).width() < 768) {
+                        _lens = false;
+                    }
+                    $('.jqzoom').jqzoom({
+                        zoomType: 'standard',
+                        title: true,
+                        lens: _lens,
+                        preloadImages: true,
+                        alwaysOn: false,
+                        xOffset: 70,
+                        position: '@position',
+                        showEffect: 'fadein',
+                        hideEffect: 'fadeout'
+                    });
+                    $('#main-product-img-lightbox-anchor-@Model.Id').magnificPopup(
+                    {
+                        type: 'image',
+                        removalDelay: 300,
+                        gallery: {
+                            enabled: true
+                        }
+                    });
+                });
+            </script>
+            <div class="clearfix" id="content">
+                <div class="clearfix">
+                    <a href="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.Name" id="main-product-img-lightbox-anchor-@Model.Id" class="jqzoom" rel='gal1'>
+                        <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" itemprop="image" class="product-image" id="main-product-img-@Model.Id" />
+                    </a>
+                </div>
+                <br />
+                @if (Model.PictureModels.Count > 1)
+                {
+                    <div class="clearfix">
+                        <div class="picture-thumbs">
+                            @for (int i = 0; i < Model.PictureModels.Count; i++)
+                            {
+                                var picture = Model.PictureModels[i];
+
+                                if (i % productPerRow == 0)
+                                {
+                                    @Html.Raw("<div>")
+                                }
+                                <a class="thumb-popup-link" href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '@picture.FullSizeImageUrl',largeimage: '@picture.FullSizeImageUrl'}" title="@Model.Name">
+                                    <img src="@picture.ImageUrl" alt="@picture.AlternateText" title="@picture.Title" />
+                                </a>
+                                if ((i % productPerRow == (productPerRow - 1)) ||
+                                    //last image
+                                    (i == (Model.PictureModels.Count - 1)))
+                                {
+                                    @Html.Raw("</div>")
+                                }
+                            }
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="picture">
+            <a href="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.Name" id="main-product-img-lightbox-anchor-@Model.Id">
+                <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" itemprop="image" id="main-product-img-@Model.Id" />
+            </a>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#main-product-img-lightbox-anchor-@Model.Id').magnificPopup(
+                    {
+                        type: 'image',
+                        removalDelay: 300,
+                        gallery: {
+                            enabled: true
+                        }
+                    });
+                });
+            </script>
+            @*<img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" itemprop="image" id="main-product-img-@Model.Id" />*@
+
+            @if (Model.PictureModels.Count > 1)
+            {
+                <div class="picture-thumbs">
+                    @for (int i = 0; i < Model.PictureModels.Count; i++)
+                    {
+                        var picture = Model.PictureModels[i];
+
+                        if (i % productPerRow == 0)
+                        {
+                            @Html.Raw("<div>")
+                        }
+                        <a class="thumb-popup-link" href="@picture.FullSizeImageUrl" title="@Model.Name">
+                            <img src="@picture.ImageUrl" alt="@picture.AlternateText" title="@picture.Title" />
+                        </a>
+                        if ((i % productPerRow == (productPerRow - 1)) ||
+                            //last image
+                            (i == (Model.PictureModels.Count - 1)))
+                        {
+                            @Html.Raw("</div>")
+                        }
+                    }
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('.thumb-popup-link').magnificPopup(
+                        {
+                            type: 'image',
+                            removalDelay: 300,
+                            gallery: {
+                                enabled: true
+                            }
+                        });
+                    });
+                </script>
+            }
+        </div>
+    }
+</div>

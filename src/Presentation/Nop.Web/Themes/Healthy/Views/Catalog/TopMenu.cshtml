@@ -1,0 +1,60 @@
+﻿@model TopMenuModel
+@using Nop.Core.Domain
+@using Nop.Core.Infrastructure
+@using Nop.Web.Models.Catalog;
+@{
+    var isRtl = this.ShouldUseRtlTheme();
+    var supportResponsive = EngineContext.Current.Resolve<StoreInformationSettings>().ResponsiveDesignSupported;
+}
+<ul class="top-menu">
+    @Html.Widget("header_menu_before")
+    @*@if (Model.RecentlyAddedProductsEnabled)
+    {
+        <li><a href="@Url.RouteUrl("RecentlyAddedProducts")">@T("Products.NewProducts")</a></li>
+    }*@
+    <li><a href="@Url.RouteUrl("CustomerInfo")">@T("Account.MyAccount")</a></li>
+    @*@if (Model.BlogEnabled)
+    {
+        <li><a href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
+    }
+    @if (Model.ForumEnabled)
+    {
+        <li><a href="@Url.RouteUrl("Boards")">@T("Forum.Forums")</a></li>
+    }*@
+    <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+    <li><a href="/requestquote">Request a Quote</a></li>
+    @Html.Widget("header_menu_after")
+</ul>
+
+
+
+
+@*@model TopMenuModel
+@using Nop.Core.Domain
+@using Nop.Core.Infrastructure
+@using Nop.Web.Models.Catalog;
+@{
+    var isRtl = this.ShouldUseRtlTheme();
+    var supportResponsive = EngineContext.Current.Resolve<StoreInformationSettings>().ResponsiveDesignSupported;
+}
+<ul class="top-menu">
+    @Html.Widget("header_menu_before")
+    @if (Model.RecentlyAddedProductsEnabled)
+    {
+        <li>
+            <a href="@Url.RouteUrl("RecentlyAddedProducts")">@T("Products.NewProducts")</a>
+        </li>
+    }
+    <li><a href="@Url.RouteUrl("CustomerInfo")">@T("Account.MyAccount")</a></li>
+    @if (Model.BlogEnabled)
+    {
+        <li><a href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
+    }
+    @if (Model.ForumEnabled)
+    {
+        <li><a href="@Url.RouteUrl("Boards")">@T("Forum.Forums")</a></li>
+    }
+    <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+    <li><a href="/requestquote">Request a Quote</a></li>
+    @Html.Widget("header_menu_after")
+</ul>*@

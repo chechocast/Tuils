@@ -1,0 +1,17 @@
+﻿Please unzip and upload request a quote plugin to Plugins folder.
+1. Go to admin, Plugins and click reload plugins
+2. Find Request a quote plugin and install it
+3. After reloading find this plugin and click configure
+4. Enable the plugin and enter an email address where a quote will be send. You can enable/disable attachments.
+
+Insert a link into any View in your theme
+<a href="@Url.RouteUrl("Nop.Plugin.RequestQuote.ContactUs")">@T("Plugins.RequestQuote.PriceQuote")</a>
+or
+<a href="/requestquote">Request a Quote</a>
+
+Please note, you can edit a quote form html in Plugins/RequestQuote.ContactUs/Views/ContactUs.cshtml file.
+If you have any questions, please contact us at support@n-theme.com.
+
+Thank you for ordering
+N-Theme team,
+www.n-theme.com

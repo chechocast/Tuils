@@ -1,0 +1,183 @@
+﻿@model Nop.Plugin.RequestQuote.ContactUs.Models.ContactUsModel
+@using System
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@using Nop.Web;
+@using Nop.Web.Framework.UI;
+@using Nop.Web.Framework;
+@{
+    Layout = "~/Views/Shared/_ColumnsThree.cshtml";
+    //title
+    Html.AddTitleParts(T("PageTitle.RequestQuote").Text);
+
+}
+<div class="page registration-page">
+    <div class="page-title">
+        <h1>@T("Plugins.RequestQuote.ContactUs.ContactUsTitle")</h1>
+    </div>
+    <div class="page-body">
+        @if (Model.SuccessfullySent)
+        {
+            <div class="result">
+                <strong>@Model.Result</strong>
+            </div>        
+        }
+        else
+        {
+            <p>@T("Plugins.RequestQuote.ContactUs.ContactUsForDetails")</p>
+            using (Html.BeginForm("ContactUs", "RequestQuote", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#@Html.FieldIdFor(model => model.CountryId)").change(function () {
+            var selectedItem = jQuery(this).val();
+            if (selectedItem > 0) {
+                var ddlStates = jQuery("#@Html.FieldIdFor(model => model.StateProvinceId)");
+                            var statesProgress = jQuery("#states-loading-progress");
+                            statesProgress.show();
+                            jQuery.ajax({
+                                cache: false,
+                                type: "GET",
+                                url: "@(Url.RouteUrl("GetStatesByCountryId"))",
+                                data: { "countryId": selectedItem, "addSelectStateItem": "true" },
+                                success: function (data) {
+                                    ddlStates.html('');
+                                    jQuery.each(data, function (id, option) {
+                                        ddlStates.append(jQuery('<option></option>').val(option.id).html(option.name));
+                                    });
+                                    statesProgress.hide();
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    alert('@T("Plugins.RequestQuote.ContactUs.FailedRetrieveStates")');
+                                    statesProgress.hide();
+                                }
+                            });
+                            }
+        });
+    });
+    </script>
+<div class="fieldset"> 
+				<div class="title">
+                    <strong>@T("Account.YourPersonalDetails")</strong>
+                </div>
+		<div class="form-fields">				
+                    <div class="inputs">
+                        @Html.LabelFor(m => m.FirstName, new { }, ":")
+                        @Html.TextBoxFor(m => m.FirstName)
+                        @Html.RequiredHint()
+                @Html.ValidationMessageFor(m => m.FirstName)
+                </div>
+					<div class="inputs">
+                    @Html.LabelFor(m => m.LastName, new { }, ":")
+                    @Html.TextBoxFor(m => m.LastName)
+                    @Html.RequiredHint()
+                @Html.ValidationMessageFor(m => m.LastName)
+                </div>
+					<div class="inputs">
+					@Html.LabelFor(m => m.Email, new { }, ":")
+                    @Html.TextBoxFor(m => m.Email)
+                    @Html.RequiredHint()
+                @Html.ValidationMessageFor(m => m.Email)
+                </div>
+		</div>
+	</div>
+<div class="fieldset">
+					<div class="title">
+                        <strong>@T("Account.CompanyDetails")</strong>
+                    </div>
+		<div class="form-fields">				
+					<div class="inputs">
+                    @Html.LabelFor(m => m.CompanyName, new { }, ":")
+                @Html.TextBoxFor(m => m.CompanyName)
+                </div>
+		</div>
+</div>
+<div class="fieldset">
+					<div class="title">
+                        <strong>@T("Account.YourAddress")</strong>
+                    </div>
+		<div class="form-fields">
+
+					<div class="inputs">
+                    @Html.LabelFor(m => m.Address, new { }, ":")
+                    @Html.TextBoxFor(m => m.Address)
+                    @Html.RequiredHint()
+                @Html.ValidationMessageFor(m => m.Address)
+                </div>
+					<div class="inputs">
+                    @Html.LabelFor(m => m.City, new { }, ":")
+                    @Html.TextBoxFor(m => m.City)
+                    @Html.RequiredHint()
+                @Html.ValidationMessageFor(m => m.City)
+                </div>
+					<div class="inputs">        
+                    @Html.LabelFor(model => model.CountryId, new { }, ":")
+                    @Html.DropDownList("CountryId", Model.AvailableCountries)
+                        @Html.RequiredHint()
+                </div>
+					<div class="inputs"> 
+                    @Html.LabelFor(model => model.StateProvinceId, new { }, ":")
+                @Html.DropDownList("StateProvinceId", Model.AvailableStates)
+                <span id="states-loading-progress" style="display: none;">@T("Common.Wait...")
+                <img src='@Url.Content("~/Content/Images/ajax_loader_small.gif")' alt='@T("Common.Wait...")'/>
+                            </span>
+					</div>
+					<div class="inputs">                
+                    @Html.LabelFor(m => m.ZipPostalCode, new { }, ":")
+                    @Html.TextBoxFor(m => m.ZipPostalCode)
+                        @Html.RequiredHint()
+                @Html.ValidationMessageFor(m => m.ZipPostalCode)
+                </div>
+		</div>
+</div>                 
+
+<div class="fieldset">
+					<div class="title">
+                        <strong>@T("Account.YourContactInformation")</strong>
+                    </div>
+		<div class="form-fields">
+					<div class="inputs">
+                    @Html.LabelFor(m => m.PhoneNumber, new { }, ":")
+                    @Html.TextBoxFor(m => m.PhoneNumber)
+                        @Html.RequiredHint()
+                @Html.ValidationMessageFor(m => m.PhoneNumber)
+                </div>
+					<div class="inputs">
+                    @Html.LabelFor(m => m.Fax, new { }, ":")
+                @Html.TextBoxFor(m => m.Fax)
+                </div>
+		</div>
+</div>
+<div class="fieldset">
+					<div class="title">
+                        <strong>@T("Plugins.RequestQuote.ContactUs.ContactUsTitle")</strong>
+                    </div>
+		<div class="form-fields">
+					<div class="inputs">
+                    @Html.LabelFor(m => m.Details, new { style = "vertical-align: top;" }, ":")
+                @Html.TextAreaFor(model => model.Details, new { style = "Width: 400px; Height: 150px;", placeholder = T("ContactUs.Enquiry.Hint") })
+                </div>
+            @if (Model.EnableQuoteAttachments)
+            {
+					<div class="inputs">
+                    <label for="file">@T("Plugins.RequestQuote.ContactUs.UploadFile"):</label>
+                    <input type="file" name="file" id="file" />
+                    </div>
+            }
+            @if (Model.SpamProtection)
+            {
+              <div class="captcha-box">
+                   @Html.Raw(Html.GenerateCaptcha())
+              </div>
+            }
+
+		</div>
+</div>
+            
+<div class="buttons">
+<input type="submit" id="save-button" value="@T("ContactUs.Button")" name="save-button" class="button-1 contact-us-button" />
+</div>
+            }
+        }
+    </div>
+</div>

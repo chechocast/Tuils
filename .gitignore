@@ -1,0 +1,18 @@
+#Documentos de Usuario
+*.suo
+*.user
+*.sln.docstates
+
+#Compilados
+[Dd]ebug/
+[Rr]elease/
+x64/
+[Bb]in/
+[Oo]bj
+
+#Resultados de Pruebas
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+#nuget
+src/packages

@@ -1,0 +1,27 @@
+﻿Please unzip and upload request a quote plugin to Plugins folder.
+1. Go to admin, Plugins and click reload plugins
+2. Find Widgets.MegaMenu plugin and install it
+3. After reloading find this plugin and click configure
+
+Go to Themes/YourTheme/Views/Shared/_Root.cshtml (if not exists, copy it from Views/Shared folder)
+
+Find
+<div class="header-menu">
+  @Html.Action("TopMenu", "Catalog")
+</div>
+
+Change it, it should be as below
+<div class="header-menu">
+   @*@Html.Action("TopMenu", "Catalog")*@
+   @Html.Widget("content_before")
+</div>
+@*@Html.Widget("content_before")*@
+
+Place css code into your Themes/YourTheme/Content/styles.css
+
+/*Mega Menu*/
+.header-menu {min-height: 42px;padding: 0;border-radius:0;-o-border-radius:0;-icab-border-radius:0;-khtml-border-radius:0;-moz-border-radius:0;-webkit-border-radius:0; }
+
+Thank you for ordering
+N-Theme team,
+www.n-theme.com

@@ -1,0 +1,31 @@
+﻿12/05/2014
+---------------------------------
+Updated references for 3.50 release
+
+07/20/2014
+---------------------------------
+Updated references
+
+05/20/2014
+---------------------------------
+Now text boxes on configure page have width 600px
+Added sub titles
+Added additional banner
+Changed html structure of displaying slides
+
+05/13/2014
+---------------------------------
+Added option to add a link inside each background of slide when title and description are not specified (edited Views/PublicInfo.cshtml @helper RenderSliderLine)
+
+03/28/2014
+---------------------------------
+Updated references 
+Updated inhering from BaseController
+
+12/08/2013
+---------------------------------
+Updated references 
+
+10/04/13
+---------------------------------
+Recreated plugin to support new jQuery slider

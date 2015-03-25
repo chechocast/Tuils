@@ -1,0 +1,43 @@
+﻿@model IList<ProductOverviewModel>
+
+@using Nop.Web.Models.Catalog;
+@using Nop.Core.Infrastructure;
+@if (Model.Count > 0)
+{
+    var supportRtl = EngineContext.Current.Resolve<Nop.Core.IWorkContext>().WorkingLanguage.Rtl;
+   <div class="product-grid bestsellers">
+        <div class="title">
+            <strong>@T("Bestsellers")</strong>
+        </div>
+        <div id="owl-home-page-bestsellers" class="owl-carousel">
+            @foreach (var item in Model)
+            {
+                <div class="item-box">@Html.Partial("_ProductBox", item)</div>
+            }
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#owl-home-page-bestsellers").owlCarousel({
+                loop:true,
+                margin:10,
+                //nav:true,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    480:{
+                        items:2
+                    },
+                    600:{
+                        items:3
+                    },
+                    768:{
+                        items:1
+                    }
+                }
+                @if(supportRtl) {<text>, rtl: true</text>}
+                })
+        });
+    </script>    
+}

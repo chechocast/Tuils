@@ -1,0 +1,54 @@
+﻿12/05/2014
+---------------------------------
+Updated references for 3.50 release
+
+04/18/2014
+---------------------------------
+Added option to display a home page in mega menu
+
+03/28/2014
+---------------------------------
+Updated references 
+Updated inhering from BaseController
+Upgraded to nopCommerce 3.30
+
+12/08/2013
+---------------------------------
+Takes only categories with "IncludeInTopMenu" True
+Updated references 
+
+11/30/2013
+---------------------------------
+Added option not include categories in menu (display only custom items)
+
+11/16/2013
+---------------------------------
+Added support for custom menu items (through custom textarea - use html only)
+
+11/09/2013
+---------------------------------
+Added support enable/disable responsive menu
+
+11/01/2013
+---------------------------------
+Added support for background pictures (bottom right corner)
+
+10/04/2013
+---------------------------------
+Rewrited plugin to use responsive feature
+
+08/04/2013
+---------------------------------
+Upgraded to nopCommerce 3.10
+
+6/12/2013
+---------------------------------
+Speed optimization (now it loads much faster)
+
+5/19/2013
+---------------------------------
+Rewrited all plugin to support Multi-Store
+
+5/19/2013
+---------------------------------
+Updated js to 1.1.3 min version

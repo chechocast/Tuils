@@ -1,0 +1,90 @@
+﻿@using Nop.Core.Domain.Common;
+@using Nop.Core.Infrastructure;
+@{
+    var displayMiniProfiler = EngineContext.Current.Resolve<Nop.Core.Domain.StoreInformationSettings>().DisplayMiniProfilerInPublicStore;
+
+    //added
+    var supportRtl = EngineContext.Current.Resolve<Nop.Core.IWorkContext>().WorkingLanguage.Rtl;
+    var currentThemeName = EngineContext.Current.Resolve<Nop.Web.Framework.Themes.IThemeContext>().WorkingThemeName;
+
+    //carousel
+    Html.AppendCssFileParts(String.Format("~/Themes/{0}/Content/owl.carousel.css", currentThemeName));
+    Html.AppendCssFileParts(String.Format("~/Themes/{0}/Content/owl.theme.default.min.css", currentThemeName));
+    Html.AddScriptParts(ResourceLocation.Foot, String.Format("~/Themes/{0}/Content/Scripts/owl.carousel.js", currentThemeName));
+    //@added
+
+    //resources
+    Html.AppendCssFileParts("~/Content/jquery-ui-themes/smoothness/jquery-ui-1.10.3.custom.min.css");
+
+    //added
+    Html.AppendScriptParts(String.Format("~/Themes/{0}/Content/scripts/custom.js", currentThemeName));
+    //added
+
+    Html.AppendScriptParts("~/Scripts/public.ajaxcart.js");
+    Html.AppendScriptParts("~/Scripts/public.common.js");
+    Html.AppendScriptParts("~/Scripts/jquery-migrate-1.2.1.min.js");
+    Html.AppendScriptParts("~/Scripts/jquery-ui-1.10.3.custom.min.js");
+    Html.AppendScriptParts("~/Scripts/jquery.validate.unobtrusive.min.js");
+    Html.AppendScriptParts("~/Scripts/jquery.validate.min.js");
+    Html.AppendScriptParts("~/Scripts/jquery-1.10.2.min.js");
+
+    //X-UA-Compatible tag
+    //var commonSettings = EngineContext.Current.Resolve<CommonSettings>();
+    //if (commonSettings.RenderXuaCompatible)
+    //{
+    //    Html.AppendHeadCustomParts(string.Format("<meta http-equiv=\"X-UA-Compatible\" content=\"{0}\"/>", commonSettings.XuaCompatibleValue));
+    //}
+}
+<!DOCTYPE html>
+@*edited*@
+<!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7" @Html.Partial("LanguageAttributes")> <![endif]-->
+<!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8" @Html.Partial("LanguageAttributes")> <![endif]-->
+<!--[if IE 8]>    <html class="ie lt-ie9" @Html.Partial("LanguageAttributes")> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html @Html.Partial("LanguageAttributes")>
+<!--<![endif]-->
+@*<html @Html.Partial("LanguageAttributes")>*@
+@*@edited*@
+
+<head>
+    <title>@Html.NopTitle(true)</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    @*added*@
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    @*added*@
+
+    <meta name="description" content="@(Html.NopMetaDescription())" />
+    <meta name="keywords" content="@(Html.NopMetaKeywords())" />
+    <meta name="generator" content="nopCommerce" />
+    @Html.NopHeadCustom()
+    @*This is used so that themes can inject content into the header*@
+    @Html.Partial("Head")
+    @Html.Widget("head_html_tag")
+    @Html.NopCssFiles(this.Url, ResourceLocation.Head)
+    @Html.NopScripts(this.Url, ResourceLocation.Head)
+    @Html.NopCanonicalUrls()
+    @Html.Action("RssHeaderLink", "News")
+    @Html.Action("RssHeaderLink", "Blog")
+    @*Favicon - upload favicon.ico file to the root directory*@
+    @Html.Action("Favicon", "Common")
+    @if (displayMiniProfiler)
+    {
+        @StackExchange.Profiling.MiniProfiler.RenderIncludes()
+    }
+    <!--Powered by nopCommerce - http://www.nopCommerce.com-->
+    <!--Copyright (c) 2008-2014-->
+    <!--[if !IE]>
+        <script>
+        var js = document.createElement('script');
+        js.src = '/Themes/@currentThemeName/Content/scripts/ios-viewport-scaling-bug-fix.js';
+        var head = document.getElementsByTagName('head')[0];
+        head.appendChild(js);
+    </script>
+    <![endif]-->
+</head>
+<body>
+    @RenderBody()
+    @Html.NopCssFiles(this.Url, ResourceLocation.Foot)
+    @Html.NopScripts(this.Url, ResourceLocation.Foot)
+</body>
+</html>

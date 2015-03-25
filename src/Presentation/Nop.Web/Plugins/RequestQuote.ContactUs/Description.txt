@@ -1,0 +1,8 @@
+﻿Group: RequestQuote ContactUs
+FriendlyName: RequestQuote ContactUs
+SystemName: RequestQuote.ContactUs
+Version: 1.70
+SupportedVersions: 3.50
+Author: N-Theme team
+DisplayOrder: 1
+FileName: Nop.Plugin.RequestQuote.ContactUs.dll

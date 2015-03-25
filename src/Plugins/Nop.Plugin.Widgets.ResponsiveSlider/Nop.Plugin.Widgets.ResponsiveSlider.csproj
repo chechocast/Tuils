@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A6441535-C449-47D1-9C85-24E68B845F13}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nop.Plugin.Widgets.ResponsiveSlider</RootNamespace>
+    <AssemblyName>Nop.Plugin.Widgets.ResponsiveSlider</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\Widgets.ResponsiveSlider\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\Widgets.ResponsiveSlider\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\WidgetsResponsiveSliderController.cs" />
+    <Compile Include="ResponsiveSliderPlugin.cs" />
+    <Compile Include="ResponsiveSliderSettings.cs" />
+    <Compile Include="Models\ConfigurationModel.cs" />
+    <Compile Include="Models\PublicInfoModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\images\banner.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\slide_1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\slide_2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="logo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WidgetsResponsiveSlider\Configure.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\WidgetsResponsiveSlider\PublicInfo.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\images\slide1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\slide2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\slide3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\themes\skin2\style.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\themes\skin3\style.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\themes\skin5\style.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentation\assets\blueprint-css\ie.css" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\buttons\icons\cross.png" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\buttons\icons\key.png" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\buttons\icons\tick.png" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\buttons\readme.txt" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\buttons\screen.css" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\fancy-type\readme.txt" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\fancy-type\screen.css" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\link-icons\icons\doc.png" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\link-icons\icons\email.png" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\link-icons\icons\external.png" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\link-icons\icons\feed.png" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\link-icons\icons\im.png" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\link-icons\icons\pdf.png" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\link-icons\icons\visited.png" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\link-icons\icons\xls.png" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\link-icons\readme.txt" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\link-icons\screen.css" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\rtl\readme.txt" />
+    <Content Include="Documentation\assets\blueprint-css\plugins\rtl\screen.css" />
+    <Content Include="Documentation\assets\blueprint-css\print.css" />
+    <Content Include="Documentation\assets\blueprint-css\screen.css" />
+    <Content Include="Documentation\assets\blueprint-css\src\forms.css" />
+    <Content Include="Documentation\assets\blueprint-css\src\grid.css" />
+    <Content Include="Documentation\assets\blueprint-css\src\grid.png" />
+    <Content Include="Documentation\assets\blueprint-css\src\ie.css" />
+    <Content Include="Documentation\assets\blueprint-css\src\print.css" />
+    <Content Include="Documentation\assets\blueprint-css\src\reset.css" />
+    <Content Include="Documentation\assets\blueprint-css\src\typography.css" />
+    <Content Include="Documentation\assets\custom-css\custom.css" />
+    <Content Include="Documentation\assets\images\htmlstructure.png" />
+    <Content Include="Documentation\assets\syntaxhighlighter\index.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shAutoloader.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushAppleScript.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushAS3.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushBash.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushColdFusion.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushCpp.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushCSharp.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushCss.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushDelphi.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushDiff.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushErlang.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushGroovy.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushJava.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushJavaFX.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushJScript.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushPerl.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushPhp.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushPlain.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushPowerShell.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushPython.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushRuby.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushSass.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushScala.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushSql.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushVb.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shBrushXml.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shCore.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\scripts\shLegacy.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\src\shAutoloader.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\src\shCore.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\src\shLegacy.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shCore.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shCoreDefault.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shCoreDjango.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shCoreEclipse.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shCoreEmacs.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shCoreFadeToGrey.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shCoreMDUltra.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shCoreMidnight.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shCoreRDark.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shThemeDefault.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shThemeDjango.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shThemeEclipse.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shThemeEmacs.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shThemeFadeToGrey.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shThemeMDUltra.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shThemeMidnight.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\styles\shThemeRDark.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\brushes\sass.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\brushes_tests.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\cases\001_basic.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\cases\002_brushes.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\cases\003_script_tag.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\cases\004_url_parsing.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\cases\005_no_gutter.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\cases\006_pad_line_numbers.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\cases\007_collapse.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\cases\007_collapse_interaction.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\cases\008_first_line.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\cases\009_class_name.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\cases\010_highlight.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\cases\011_smart_tabs.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\cases\012_server_side.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\cases\013_html_script.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\cases\014_legacy.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\commonjs_tests.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\js\jquery-1.4.2.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\js\qunit.css" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\js\qunit.js" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\syntaxhighlighter_tests.html" />
+    <Content Include="Documentation\assets\syntaxhighlighter\tests\theme_tests.html" />
+    <Content Include="Documentation\index.html" />
+    <Content Include="Documentation\license.txt" />
+    <Content Include="Content\images\bckg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\bg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\bg_direction_nav.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\bg_direction_nav_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\bullets.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\bullets_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\caption-bg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\nav-bg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\navigation-bg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\nav_paddles.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\nav_paddles_down.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\slider-controls.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\timer-bar-bg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\tooltip.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\topbar-active.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\topbar-hover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\topbar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\index.html" />
+    <Content Include="Content\index2.html" />
+    <Content Include="Content\index3.html" />
+    <Content Include="Content\index4.html" />
+    <Content Include="Content\index5.html" />
+    <Content Include="Content\themes\iview.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\themes\skin1\style.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\themes\n-theme\style.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Description.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HowToUse.txt" />
+    <Content Include="Notes.txt" />
+    <Content Include="changes.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\combined.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\iview.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\iview.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\iview.pack.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery.easing.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery.fullscreen.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\raphael-min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Nop.Core\Nop.Core.csproj">
+      <Project>{6bda8332-939f-45b7-a25e-7a797260ae59}</Project>
+      <Name>Nop.Core</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Nop.Services\Nop.Services.csproj">
+      <Project>{210541ad-f659-47da-8763-16f36c5cd2f4}</Project>
+      <Name>Nop.Services</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj">
+      <Project>{75fd4163-333c-4dd5-854d-2ef294e45d94}</Project>
+      <Name>Nop.Web.Framework</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\config.rb" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shCore.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shCoreDefault.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shCoreDjango.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shCoreEclipse.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shCoreEmacs.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shCoreFadeToGrey.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shCoreMDUltra.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shCoreMidnight.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shCoreRDark.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shThemeDefault.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shThemeDjango.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shThemeEclipse.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shThemeEmacs.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shThemeFadeToGrey.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shThemeMDUltra.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shThemeMidnight.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\shThemeRDark.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\compass\_theme_template.scss" />
+    <None Include="Documentation\assets\syntaxhighlighter\LGPL-LICENSE" />
+    <None Include="Documentation\assets\syntaxhighlighter\MIT-LICENSE" />
+    <None Include="Documentation\assets\syntaxhighlighter\tests\.rvmrc" />
+    <None Include="Documentation\assets\syntaxhighlighter\tests\webrick.rb" />
+    <None Include="Documentation\assets\syntaxhighlighter\tests\webrick.sh" />
+    <None Include="Content\LICENSE" />
+    <None Include="packages.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Documentation\__MACOSX\assets\blueprint-css\plugins\buttons\icons\" />
+    <Folder Include="Documentation\__MACOSX\assets\blueprint-css\plugins\fancy-type\" />
+    <Folder Include="Documentation\__MACOSX\assets\blueprint-css\plugins\link-icons\icons\" />
+    <Folder Include="Documentation\__MACOSX\assets\blueprint-css\plugins\rtl\" />
+    <Folder Include="Documentation\__MACOSX\assets\blueprint-css\src\" />
+    <Folder Include="Documentation\__MACOSX\assets\images\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,7 @@
+﻿Slides: slide, captions: title, short description, media.
+Slide option: data-x, data-y, data-transition (combo), data-speed
+
+TODO:
+data-easing
+data-width
+data-height

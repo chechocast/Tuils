@@ -1,0 +1,114 @@
+﻿@model FooterModel
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@using Nop.Core.Infrastructure
+@using Nop.Web.Models.Common;
+
+<div class="footer">
+    @*added*@
+    <div class="footer-menu">
+        <h3>@T("Custom.CustomerServices")</h3>
+        <ul class="footer-list">
+            @if (Model.SitemapEnabled)
+            {
+                <li><a href="@Url.RouteUrl("Sitemap")">@T("Sitemap")</a></li>
+            }
+
+
+            <li>@T("Custom.ShoppingGuide")</li>
+            <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+            <li>@T("Custom.LiveChat")</li>
+            <li>@T("Custom.FAQ")</li>
+            <li>@T("Custom.Help")</li>
+        </ul>
+    </div>
+    <div class="footer-menu">
+        <h3>@T("Account.MyAccount")</h3>
+        <ul class="footer-list">
+            <li><a href="@Url.RouteUrl("Login")">@T("Account.Login")</a> | <a href="@Url.RouteUrl("Register")">@T("Account.Register")</a></li>
+            <li><a href="@Url.RouteUrl("CustomerOrders")">@T("Custom.OrderHistory")</a></li>
+            <li><a href="@Url.RouteUrl("CustomerRewardPoints")">@T("Custom.CustomerPoints")</a></li>
+            <li><a href="@Url.RouteUrl("Wishlist")">@T("Custom.Wishlist")</a></li>
+            <li><a href="@Url.RouteUrl("CustomerReturnRequests")">@T("Custom.RMA")</a></li>
+        </ul>
+    </div>
+    <div class="footer-menu">
+        <h3>@T("Custom.CompanyInfo")</h3>
+        <ul class="footer-list">
+            <li><a href="@Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("aboutus") })">@T("AboutUs")</a></li>
+            <li><a href="@Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("privacyinfo") })">@T("PrivacyNotice")</a></li>
+            <li><a href="@Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("shippinginfo") })">@T("ShippingReturns")</a></li>
+            <li><a href="@Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("conditionsofuse") })">@T("ConditionsOfUse")</a></li>
+
+
+            @if (Model.NewsEnabled)
+            {
+                <li><a href="@Url.RouteUrl("NewsArchive")">@T("News")</a></li>
+            }
+            @if (Model.BlogEnabled)
+            {
+                <li><a href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
+            }
+        </ul>
+    </div>
+    <div class="footer-menu last">
+        <h3>@T("Custom.JoinOurCommunity")</h3>
+        <div id="social">
+            @if (!string.IsNullOrEmpty(Model.FacebookLink))
+            {
+                <a class="facebook first" href="@Model.FacebookLink" target="_blank"></a>
+            }
+            @if (!string.IsNullOrEmpty(Model.TwitterLink))
+            {
+                <a class="twitter" href="@Model.TwitterLink" target="_blank"></a>
+            }
+            @if (!string.IsNullOrEmpty(Model.YoutubeLink))
+            {
+                <a class="youtube" href="@Model.YoutubeLink" target="_blank"></a>
+            }
+
+            <a class="pinterest" href="http://www.pinterest.com/your_address" target="_blank"></a>@*TODO:: add link as other *@
+
+            @if (!string.IsNullOrEmpty(Model.GooglePlusLink))
+            {
+                <a class="googleplus" href="@Model.GooglePlusLink" target="_blank"></a>
+            }
+            <p class="fontawesome-phone">
+                @T("Custom.CallUs"): <a href="tel:@T("Custom.PhoneNumber")">@T("Custom.PhoneNumber")</a>
+            </p>
+            <p class="fontawesome-envelope-alt">
+                @T("ContactUs"): <a href="mailto:@T("Custom.EmailFooter")">@T("Custom.EmailFooter")</a>
+            </p>
+            <ul>
+                <li class="visa"></li>
+                <li class="mastercard"></li>
+                <li class="amex"></li>
+                <li class="discover"></li>
+            </ul>
+        </div>
+    </div>
+    @*@added*@
+
+    <div class="footer-poweredby">
+        Powered by <a href="http://www.nopcommerce.com/">nopCommerce</a>
+        @*Would you like to remove the "Powered by nopCommerce" link in the bottom of the footer?
+            Find more info here http://www.nopcommerce.com/copyrightremoval.aspx*@
+        @*added*@
+        Designed by <a title="nopCommerce themes" href="http://www.n-theme.com/">N-Theme</a>
+        @*@added*@
+    </div>
+    @if (Model.DisplayTaxShippingInfoFooter)
+    {
+        var inclTax = EngineContext.Current.Resolve<IWorkContext>().TaxDisplayType == TaxDisplayType.IncludingTax;
+        <div class="footer-tax-shipping">
+            @T(inclTax ? "Footer.TaxShipping.InclTax" : "Footer.TaxShipping.ExclTax", Url.RouteUrl("Topic", new { SeName = Html.GetTopicSeName("shippinginfo") }))
+        </div>
+    }
+    <div class="footer-disclaimer">
+        @T("Content.CopyrightNotice", DateTime.Now.Year.ToString(), @Model.StoreName)
+    </div>
+    <div class="footer-store-theme">
+        @Html.Action("StoreThemeSelector", "Common")
+    </div>
+    @Html.Widget("footer")
+</div>

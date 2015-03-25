@@ -1,0 +1,109 @@
+﻿@model Nop.Plugin.Widgets.ResponsiveSlider.Models.PublicInfoModel
+@{
+    Layout = "";
+    Html.AddCssFileParts("~/Plugins/Widgets.ResponsiveSlider/Content/themes/iview.css");
+    Html.AddCssFileParts("~/Plugins/Widgets.ResponsiveSlider/Content/themes/n-theme/style.css");
+
+    Html.AddScriptParts(ResourceLocation.Foot, "~/Plugins/Widgets.ResponsiveSlider/Scripts/combined.js");
+    Html.AddScriptParts("~/Plugins/Widgets.ResponsiveSlider/Scripts/iview.js");
+
+    //Html.AddScriptParts(ResourceLocation.Foot, "~/Plugins/Widgets.ResponsiveSlider/Scripts/jquery.fullscreen.js");  
+}
+@using System
+@using System.Web
+@using Nop.Web.Framework.UI
+@using System.Collections.Generic;
+@helper RenderSliderLine(string pictureThumbUrl, string pictureUrl, string title, string titleEffects, string subTitle, string subTitleEffects, string shortDescr, string shortDescrEffects, string media, string mediaEffects, string slideURL, int slideNumber)
+{
+    if (!String.IsNullOrEmpty(pictureUrl))
+    {
+            <div data-iview:thumbnail="@pictureThumbUrl" data-iview:image="@pictureUrl" class="slide@{ @slideNumber }">                 
+            @if (!String.IsNullOrEmpty(media))
+            {
+                if (media.ToLower().Contains("iframe"))
+                {
+                    <div class="iview-caption one video-caption" @if (!String.IsNullOrEmpty(mediaEffects)) { @Html.Raw(mediaEffects) }>@Html.Raw(media)</div>
+                }
+                else
+                {
+                    <div class="iview-caption one" @if (!String.IsNullOrEmpty(mediaEffects))
+                                                   { @Html.Raw(mediaEffects) }><a href="@slideURL" title="@Html.Raw(shortDescr)">@Html.Raw(media)</a></div>				                                                                                                                                                                                                                                                     
+                }
+            }
+            @if (!String.IsNullOrEmpty(title))
+            {           	
+                <div class="iview-caption two" @if (!String.IsNullOrEmpty(titleEffects))
+                                               { @Html.Raw(titleEffects) }><div id="iview-title">@Html.Raw(title)</div></div>				                                                                                                                                                                                                                                                           
+            }
+            @if (!String.IsNullOrEmpty(subTitle))
+            {           	
+                <div class="iview-caption three" @if (!String.IsNullOrEmpty(subTitleEffects))
+                                           { @Html.Raw(subTitleEffects) }><div id="iview-subTitle">@Html.Raw(subTitle)</div></div>				                                                                                                                                                                                                                                                           
+            }
+            @if (!String.IsNullOrEmpty(shortDescr))
+            {     	
+                <div class="iview-caption four" @if (!String.IsNullOrEmpty(shortDescrEffects))
+                                           { @Html.Raw(shortDescrEffects) }><div id="iview-shortDescr">@Html.Raw(shortDescr)</div></div>				                                                                                                                                                                                                                                                      
+            }  
+            
+            @if (String.IsNullOrEmpty(media) &&
+                String.IsNullOrEmpty(title) &&
+                String.IsNullOrEmpty(shortDescr) &&
+                !String.IsNullOrEmpty(slideURL))
+            {
+                <a style="display:block;height:100%;" href="@slideURL"></a> 
+            }            
+            </div>  
+    }
+}
+@helper RenderBannerLine(string BannerPictureUrl, string BannerText, string BannerAltText, string BannerLink, int bannerNum)
+{
+    <div class="banner_@bannerNum">
+        @if (!String.IsNullOrEmpty(BannerPictureUrl) && !String.IsNullOrEmpty(BannerLink))
+        {  
+            <a href="@BannerLink"><img alt="@BannerAltText" src="@BannerPictureUrl" /></a><div class="promo_@bannerNum">@Html.Raw(BannerText)</div>
+        }
+        @if (!String.IsNullOrEmpty(BannerPictureUrl) && String.IsNullOrEmpty(BannerLink))
+        {        
+                <img alt="@BannerAltText" src="@BannerPictureUrl" />        
+        }
+    </div>
+}
+<div class="iview-container">
+    <div id="iview">
+        @RenderSliderLine(Model.PictureThumb1Url, Model.Picture1Url, Model.TitleText1, Model.TitleTextEffects1, Model.SubTitleText1, Model.SubTitleTextEffects1, Model.Text1, Model.TextEffects1, Model.Media1, Model.MediaEffects1, Model.Link1, 1)
+        @RenderSliderLine(Model.PictureThumb2Url, Model.Picture2Url, Model.TitleText2, Model.TitleTextEffects2, Model.SubTitleText2, Model.SubTitleTextEffects2, Model.Text2, Model.TextEffects2, Model.Media2, Model.MediaEffects2, Model.Link2, 2)
+        @RenderSliderLine(Model.PictureThumb3Url, Model.Picture3Url, Model.TitleText3, Model.TitleTextEffects3, Model.SubTitleText3, Model.SubTitleTextEffects3, Model.Text3, Model.TextEffects3, Model.Media3, Model.MediaEffects3, Model.Link3, 3)
+        @RenderSliderLine(Model.PictureThumb4Url, Model.Picture4Url, Model.TitleText4, Model.TitleTextEffects4, Model.SubTitleText4, Model.SubTitleTextEffects4, Model.Text4, Model.TextEffects4, Model.Media4, Model.MediaEffects4, Model.Link4, 4)
+    </div>
+     @if (!String.IsNullOrEmpty(Model.BannerPicture1Url))
+     {
+        <div id="banners">
+            @RenderBannerLine(Model.BannerPicture1Url, Model.BannerText1, Model.BannerAltText1, Model.BannerLink1, 1)
+            @RenderBannerLine(Model.BannerPicture2Url, Model.BannerText2, Model.BannerAltText2, Model.BannerLink2, 2)
+            @RenderBannerLine(Model.BannerPicture3Url, Model.BannerText3, Model.BannerAltText3, Model.BannerLink3, 3)
+            @RenderBannerLine(Model.BannerPicture4Url, Model.BannerText4, Model.BannerAltText3, Model.BannerLink4, 4)
+        </div>
+     }
+</div>
+@if (!String.IsNullOrEmpty(Model.BannerPicture1Url) && 
+    (String.IsNullOrEmpty(Model.BannerPicture2Url) && 
+    String.IsNullOrEmpty(Model.BannerPicture3Url) && 
+    String.IsNullOrEmpty(Model.BannerPicture4Url)))
+{
+    <style>.iview-container #banners, #banners .banner_1{ max-width: 100% !important; width: 100%  !important;text-align: left;}
+        .iview-container > div { float: none !important; }
+    </style>
+}
+<script>
+    $(document).ready(function () {
+        $('#iview').iView({
+            timerDiameter: 25, // Timer diameter
+            animationSpeed: 500, // Slide transition speed
+            pauseTime: 7000,
+            pauseOnHover: true,
+            keyboardNav: true, // Use left & right arrows
+            touchNav: true // Use Touch swipe to change slides
+        });
+    });
+</script>

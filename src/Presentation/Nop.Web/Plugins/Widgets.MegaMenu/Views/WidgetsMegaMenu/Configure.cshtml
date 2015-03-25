@@ -1,0 +1,193 @@
+﻿@{
+    Layout = "";
+}
+@model Nop.Plugin.Widgets.MegaMenu.Models.ConfigurationModel
+@using Nop.Web.Framework;
+@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+@using (Html.BeginForm())
+{
+    <div id="responsiveslider-configure">
+        <ul>
+            <li @Html.RenderSelectedTabIndex(0, GetSelectedTabIndex())>
+                @T("Plugins.Widgets.MegaMenu.Configuration")
+            </li>
+            @*<li @Html.RenderSelectedTabIndex(1, GetSelectedTabIndex())>
+                @T("Plugins.Widgets.MegaMenu.BgConfiguration")
+            </li>*@
+        </ul>
+        <div>
+            @TabConfiguration()
+        </div>
+        @*<div>
+            @TabBgConfiguration()
+        </div>*@
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#responsiveslider-configure").kendoTabStrip({
+                animation: {
+                    open: {
+                        effects: "fadeIn"
+                    }
+                },
+                select: tabstrip_on_tab_select
+            });
+        });
+    </script>
+    <style>
+       .qq-upload-list li.qq-upload-success { background-color: #5DA30C; color: #FFFFFF; width: 240px; }
+    </style>
+}
+    @helper TabConfiguration()
+    {
+    <fieldset>
+        <legend><strong>@T("Plugins.Widgets.MegaMenu.Configuration")</strong></legend>
+        <table class="adminContent">
+            <tr>
+            <td class="adminTitle">
+                @Html.OverrideStoreCheckboxFor(model => model.EnableMenu_OverrideForStore, model => model.EnableMenu, Model.ActiveStoreScopeConfiguration)
+                @Html.NopLabelFor(model => model.EnableMenu):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.EnableMenu)
+                @Html.ValidationMessageFor(model => model.EnableMenu)
+            </td>
+            </tr>
+            <tr>
+            <td class="adminTitle">
+                @Html.OverrideStoreCheckboxFor(model => model.EnableResponsiveMenu_OverrideForStore, model => model.EnableResponsiveMenu, Model.ActiveStoreScopeConfiguration)
+                @Html.NopLabelFor(model => model.EnableResponsiveMenu):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.EnableResponsiveMenu)
+                @Html.ValidationMessageFor(model => model.EnableResponsiveMenu)
+            </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.OverrideStoreCheckboxFor(model => model.IncludeCategoriesInMenu_OverrideForStore, model => model.IncludeCategoriesInMenu, Model.ActiveStoreScopeConfiguration)
+                    @Html.NopLabelFor(model => model.IncludeCategoriesInMenu):
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.IncludeCategoriesInMenu)
+                    @Html.ValidationMessageFor(model => model.IncludeCategoriesInMenu)
+                </td>
+            </tr> 
+            <tr>
+            <td class="adminTitle">
+                @Html.OverrideStoreCheckboxFor(model => model.DisplaySubcategories_OverrideForStore, model => model.DisplaySubcategories, Model.ActiveStoreScopeConfiguration)
+                @Html.NopLabelFor(model => model.DisplaySubcategories):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.DisplaySubcategories)
+                @Html.ValidationMessageFor(model => model.DisplaySubcategories)
+            </td>
+            </tr>  
+            <tr>
+            <td class="adminTitle">
+                @Html.OverrideStoreCheckboxFor(model => model.ColumnsNumber_OverrideForStore, model => model.ColumnsNumber, Model.ActiveStoreScopeConfiguration)
+                @Html.NopLabelFor(model => model.ColumnsNumber):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.ColumnsNumber)
+                @Html.ValidationMessageFor(model => model.ColumnsNumber)
+            </td>
+            </tr> 
+             <tr>
+            <td class="adminTitle">
+                @Html.OverrideStoreCheckboxFor(model => model.DisplayHomePage_OverrideForStore, model => model.DisplayHomePage, Model.ActiveStoreScopeConfiguration)
+                @Html.NopLabelFor(model => model.DisplayHomePage):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.DisplayHomePage)
+                @Html.ValidationMessageFor(model => model.DisplayHomePage)
+            </td>
+            </tr>
+
+            <tr>
+                <td class="adminTitle">
+                    @Html.OverrideStoreCheckboxFor(model => model.CustomItems_OverrideForStore, model => model.CustomItems, Model.ActiveStoreScopeConfiguration)
+                    @Html.NopLabelFor(model => model.CustomItems):
+                </td>
+                <td class="adminData">
+                    @Html.TextAreaFor(model => model.CustomItems, new { style = "Width: 500px; Height: 150px;", placeholder = T("Plugins.Widgets.MegaMenu.CustomItems.Hint") })
+                    @Html.ValidationMessageFor(model => model.CustomItems)
+                </td>
+            </tr>        
+        </table>
+    </fieldset>
+    <br />
+    <table class="adminContent">
+        <tr>
+            <td colspan="2" width="100%">
+                <input type="submit" name="save" class="t-button" value="@T("Admin.Common.Save")" />
+            </td>
+        </tr>
+    </table>
+    }
+    @*@helper TabBgConfiguration()
+    {
+    <fieldset>
+        <legend><strong>@T("Plugins.Widgets.MegaMenu.BgConfiguration")</strong></legend>
+        <table class="adminContent">
+            <tr>
+                <td class="adminTitle">
+                    @Html.OverrideStoreCheckboxFor(model => model.BgPicture1Url_OverrideForStore, model => model.BgPicture1Url, Model.ActiveStoreScopeConfiguration)
+                    @Html.NopLabelFor(model => model.BgPicture1Url):
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.BgPicture1Url)
+                    @Html.ValidationMessageFor(model => model.BgPicture1Url)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.OverrideStoreCheckboxFor(model => model.BgPicture2Url_OverrideForStore, model => model.BgPicture2Url, Model.ActiveStoreScopeConfiguration)
+                    @Html.NopLabelFor(model => model.BgPicture2Url):
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.BgPicture2Url)
+                    @Html.ValidationMessageFor(model => model.BgPicture2Url)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.OverrideStoreCheckboxFor(model => model.BgPicture3Url_OverrideForStore, model => model.BgPicture3Url, Model.ActiveStoreScopeConfiguration)
+                    @Html.NopLabelFor(model => model.BgPicture3Url):
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.BgPicture3Url)
+                    @Html.ValidationMessageFor(model => model.BgPicture3Url)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.OverrideStoreCheckboxFor(model => model.BgPicture4Url_OverrideForStore, model => model.BgPicture4Url, Model.ActiveStoreScopeConfiguration)
+                    @Html.NopLabelFor(model => model.BgPicture4Url):
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.BgPicture4Url)
+                    @Html.ValidationMessageFor(model => model.BgPicture4Url)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.OverrideStoreCheckboxFor(model => model.BgPicture5Url_OverrideForStore, model => model.BgPicture5Url, Model.ActiveStoreScopeConfiguration)
+                    @Html.NopLabelFor(model => model.BgPicture5Url):
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.BgPicture5Url)
+                    @Html.ValidationMessageFor(model => model.BgPicture5Url)
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <br />
+    <table class="adminContent">
+        <tr>
+            <td colspan="2" width="100%">
+                <input type="submit" name="save" class="t-button" value="@T("Admin.Common.Save")" />
+            </td>
+        </tr>
+    </table>
+    }*@

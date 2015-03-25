@@ -1,0 +1,75 @@
+﻿@{
+    Layout = "";
+}
+@model Nop.Plugin.RequestQuote.ContactUs.Models.ConfigurationModel
+@using Nop.Web.Framework;
+@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend><strong>@T("Plugins.RequestQuote.ContactUs.Configuration")</strong></legend>
+        <table class="adminContent">
+            <tr>
+            <td class="adminTitle">
+                @Html.OverrideStoreCheckboxFor(model => model.EnableQuote_OverrideForStore, model => model.EnableQuote, Model.ActiveStoreScopeConfiguration)
+                @Html.NopLabelFor(model => model.EnableQuote):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.EnableQuote)
+                @Html.ValidationMessageFor(model => model.EnableQuote)
+            </td>
+            </tr>
+            <tr>
+            <td class="adminTitle">
+                @Html.OverrideStoreCheckboxFor(model => model.EnableQuoteAttachments_OverrideForStore, model => model.EnableQuoteAttachments, Model.ActiveStoreScopeConfiguration)
+                @Html.NopLabelFor(model => model.EnableQuoteAttachments):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.EnableQuoteAttachments)
+                @Html.ValidationMessageFor(model => model.EnableQuoteAttachments)
+            </td>
+            </tr>
+
+            <tr>
+            <td class="adminTitle">
+                @Html.OverrideStoreCheckboxFor(model => model.QuoteSendTo_OverrideForStore, model => model.QuoteSendTo, Model.ActiveStoreScopeConfiguration)
+                @Html.NopLabelFor(model => model.QuoteSendTo):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.QuoteSendTo)
+                @Html.ValidationMessageFor(model => model.QuoteSendTo)
+            </td>
+            </tr> 
+            <tr>
+            <td class="adminTitle">
+                @Html.OverrideStoreCheckboxFor(model => model.QuoteSendCCTo_OverrideForStore, model => model.QuoteSendCCTo, Model.ActiveStoreScopeConfiguration)
+                @Html.NopLabelFor(model => model.QuoteSendCCTo):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.QuoteSendCCTo)
+                @Html.ValidationMessageFor(model => model.QuoteSendCCTo)
+            </td>
+            </tr>        
+            <tr>
+            <td class="adminTitle">
+                @Html.OverrideStoreCheckboxFor(model => model.SpamProtection_OverrideForStore, model => model.SpamProtection, Model.ActiveStoreScopeConfiguration)
+                @Html.NopLabelFor(model => model.SpamProtection):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.SpamProtection)
+                @Html.ValidationMessageFor(model => model.SpamProtection)
+            </td>
+            </tr>        
+
+       
+        </table>
+    </fieldset>
+    <br />
+    <table class="adminContent">
+        <tr>
+            <td colspan="2" width="100%">
+                <input type="submit" name="save" class="t-button" value="@T("Admin.Common.Save")" />
+            </td>
+        </tr>
+    </table>
+}

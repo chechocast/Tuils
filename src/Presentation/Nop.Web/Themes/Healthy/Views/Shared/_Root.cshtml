@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "~/Views/Shared/_Root.Head.cshtml";
+    //added
+    var browser = Request.Browser;
+    //added
+}
+@Html.Widget("body_start_html_tag_after")
+@Html.Partial("_Notifications")
+@Html.Action("AdminHeaderLinks", "Common")
+@*added*@
+@if ((browser.Browser == "IE" && browser.MajorVersion > 8) || browser.Browser != "IE")
+{
+    <header class="row" role="banner">
+        <div class="container hd">
+            @Html.Partial("Header")
+            <div class="header-menu">@Html.Widget("content_before")</div>
+        </div>
+    </header>
+}
+    @*@added*@
+    <div class="master-wrapper-page container hd">
+        @Html.Action("JavaScriptDisabledWarning", "Common")
+        <div class="master-wrapper-content">
+            <script type="text/javascript">
+                AjaxCart.init(false, '.header-links .cart-qty', '.header-links .wishlist-qty', '#flyout-cart');
+            </script>
+            @*edited*@
+            @if (browser.Browser == "IE" && browser.MajorVersion < 9)
+            {
+                @Html.Partial("Header")
+                @Html.Widget("content_before")
+            }
+            @*@Html.Partial("Header")*@
+                @*edited*@
+                @*<div class="header-menu">
+                        @Html.Action("TopMenu", "Catalog")
+                    </div>
+                    @Html.Widget("content_before")*@
+                @*added*@
+                @if (IsSectionDefined("ContentSliderSection"))
+                {
+                    @RenderSection("ContentSliderSection")
+                }
+                @*added*@
+                    @*ajax loading window*@
+                    <div class="ajax-loading-block-window" style="display: none">
+                        <div class="loading-image">
+                        </div>
+                    </div>
+                    <div class="master-wrapper-main">
+                        @RenderBody()
+                    </div>
+                    @Html.Widget("content_after")
+                </div>
+                @*edited*@
+                @if (browser.Browser == "IE" && browser.MajorVersion < 9)
+                {
+                    @Html.Action("Footer", "Common")
+                }
+                @*@Html.Action("Footer", "Common")*@
+                    @*edited*@
+                </div>
+                @Html.Action("EuCookieLaw", "Common")
+                @*added*@
+                @if ((browser.Browser == "IE" && browser.MajorVersion > 8) || browser.Browser != "IE")
+                {
+                    <footer class="row" role="banner">
+                        <div class="container hd">
+                            @Html.Action("Footer", "Common")
+                        </div>
+                    </footer>
+                }
+                @*added*@
+                @Html.Widget("body_end_html_tag_before")
